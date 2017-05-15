@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>网易考拉海购首页</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="font/iconfont.css">
+	<script src="lib/jquery-3.1.1.js"></script>
+	<script src="js/bigLbt.js"></script>
+	<script src="js/common.js"></script>
+	<script>
+		$(function(){
+			//吸顶菜单
+			$(window).scroll(function(){
+			    var $scroll = this.scrollY;
+			    if($scroll>=100){
+			        $('#leftlist').css({'position':'fixed','top':100});
+			        $('#rightlist').css({'position':'fixed','top':100});
+				}else{
+                    $('#leftlist').css({'position':'fixed','top':650});
+                    $('#rightlist').css({'position':'fixed','top':650});
+				}
+			})
+
+			//大轮播图
+			console.log($('#banner'));
+			$('#banner').flnLbt({
+				imgs:['images/index/biglbt1.jpg',
+				'images/index/biglbt2.jpg',
+				'images/index/biglbt3.jpg',
+				'images/index/biglbt4.jpg',
+				'images/index/biglbt5.jpg',
+				'images/index/biglbt6.jpg',
+				'images/index/biglbt1.jpg'	]
+			});
+			
+			//倒计时
+			var span = document.querySelector('.daoJi');
+			var i = span.children;
+			console.log(i);
+			var end = Date.parse('2017/5/19 10:00:00');
+			showTimeLeft();
+			var timer = setInterval(showTimeLeft,1000);
+			function showTimeLeft(){
+		 		var now = Date.now();
+		 		var offsetTime = Math.floor((end - now)/1000);
+		 		if(offsetTime <= 0){
+		 			clearInterval(timer);
+		 		}
+		 		var secLeft = offsetTime%60;
+				var minLeft = Math.floor(offsetTime/60)%60;
+		 		var hourLeft = Math.floor(offsetTime/60/60)%24;
+
+		 		var h2=hourLeft%10;
+				var h1=parseInt(hourLeft/10);
+				var m2= minLeft%10;
+				var m1=parseInt( minLeft/10);
+				var s2=secLeft%10;
+				var s1=parseInt(secLeft/10);
+				i[0].innerHTML = h1;i[1].innerHTML = h2;
+				i[2].innerHTML = m1;i[3].innerHTML = m2;
+				i[4].innerHTML = s1;i[5].innerHTML = s2;
+			 }
+
+			 //小图轮播
+			 var index = 0;
+        	 // 上一张索引值
+        	 var lastIndex = 0;
+			 var littlelbt = document.querySelector('.littleSer');
+			 var list = littlelbt.children;
+			 var len = list.length;
+			 for(var j=0;j<len;j++){
+			 	if(j===0){
+			 		continue;
+			 	}
+			 	animate(list[j],{opacity:0});
+			 }
+			   // @淡入淡出效果
+	        var timer = setInterval(autoPlay,3000);
+
+	        function autoPlay(){
+	            index++;
+	            showPic();
+	        }
+
+	        function showPic(){
+	            if(index<0){
+	                index = len - 1;
+	            }else if(index>len-1){
+	                index = 0;
+	            }
+	            animate(list[index],{opacity:1});
+           		animate(list[lastIndex],{opacity:0});
+           		lastIndex = index;
+
+			}
+
+//			//两侧列表在鼠标滚动式时位置改变
+//			$('html').on('scroll',function(){
+//			    $('#rightlist').animate({top:50px});
+//			})
+
+		})
+	</script>
+</head>
+<body>
+	<header id="topheader">
+		<div class="container">  
+			<h5>考拉欢迎你！</h5>
+			<ul class="logMsg">
+				<li><a target="_black" href="html/login.html">登录</a></li>
+				<li><a target="_black" href="html/register.html">注册</a></li>
+				<li><a href="#"><i class="iconfont icon-shouji"></i>手机考拉海购</a></li>
+			</ul>
+			<ul class="orMsg">
+				<li><a href=""><i class="iconfont icon-hongqi"></i>每日签到</a></li>
+				<li><a href="">我的订单</a></li>
+				<li><a href="">个人中心 ></a>
+					<ul class="self">
+						<li><a target="_black" href="#">我的优惠券</a></li>
+						<li><a target="_black" href="#">我的考拉豆</a></li>
+						<li><a target="_black" href="#">账户安全</a></li>
+						<li><a target="_black" href="#">我的实名认证</a></li>
+						<li><a target="_black" href="#">我收藏的商品</a></li>
+						<li><a target="_black" href="#">我关注的品牌</a></li>
+						<li><a target="_black" href="#">售后管理</a></li>
+					</ul>
+				</li>
+				<li><a href="">客户服务></a>
+					<ul class="server"> 
+						<li><a target="_black" href="#">联系客服</a></li>
+						<li><a target="_black" href="#">帮助中心</a></li>
+					</ul>
+				</li>
+				<li><a href="">充值中心></a>
+					<ul class="chongzhi">
+						<li><a target="_black" href="#">话费充值</a></li>
+						<li><a target="_black" href="#">游戏充值</a></li>
+					</ul>
+				</li>
+				<li><a target="_black" href="#">消费者告知书</a></li>
+				<li class="last"><a href="">更多></a>
+					<ul class="more">
+						<li><a target="_black" href="#">收藏本站</a></li>
+						<li><a target="_black" href="#">新浪微博</a></li>
+						<li><a target="_black" href="#">微信公众号</a></li>
+						<li><a target="_black" href="#">易信公众号 </a></li>
+						<li><a target="_black" href="#">招商合作</a></li>
+						<li><a target="_black" href="#">考拉招聘</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>	
+	</header>
+	<main id="search">
+		<div class="container">
+			<a href="#"><img src="images/index/logo.bmp"></a>
+			<div class="serCenter">
+				<div class="ser">
+					<div class="neibox">
+						<i class="iconfont icon-sousuo-sousuo"></i>
+						<input class="serMsg" class="inMsg"></input>
+					</div>
+					<span class="serPic">
+						<i class="iconfont icon-sousuo-sousuo"></i>
+					</span>
+				</div>
+				<ul class="hot">
+					<li><a target="_black" href="#">游戏充值</a></li>
+					<li><a target="_black" href="#">花少明星同款</a></li>
+					<li><a target="_black" href="#">奶粉</a></li>
+					<li><a target="_black" href="#">马油</a></li>
+					<li><a target="_black" href="#">MK</a></li>
+					<li><a target="_black" href="#">麦片 </a></li>
+					<li><a target="_black" href="#">LAMY</a></li>
+				</ul>
+			</div>
+			<a class="shopCar" target="_black" href="html/shopCar.html"><i class="iconfont icon-gouwuchekong"></i>购物车</a>	
+		</div>
+	</main>
+	<nav id="navTop">
+		<div class="container">
+			<ul class="ulTop">
+				<li><a target="_black" href="#">-- 所有分类</a>
+					<ul class="proList">
+						<li><a target="_black" href=""><i class="iconfont icon-muying"></i>母婴儿童 ></a>
+							<div class="xiang">
+								<div class="left">
+									<div class="pro1">
+										<div class="left_shangpin">
+											<h5><a target="_black" href="html/list.html">奶粉</a></h5>
+											<span>
+												<a target="_black" href="#">爱他美</a>
+												<a target="_black" href="#">牛栏</a>
+												<a target="_black" href="#">Hero Baby</a>
+												<a target="_black" href="#">喜宝</a>
+												<a target="_black" href="#">贝拉米</a>
+												<a target="_black" href="#">美素佳儿</a>
+												<a target="_black" href="#">美林</a>
+												<a target="_black" href="#">a2</a>
+												<a target="_black" href="#">惠氏</a>
+												<a target="_black" href="#">雅培</a>
+												<a target="_black" href="#">美赞臣</a>
+												<a target="_black" href="#">合生元</a>
+												<a target="_black" href="#">Pre段</a>
+												<a target="_black" href="#">1段</a>
+												<a target="_black" href="#">2段</a>
+												<a target="_black" href="#">3段</a>
+												<a target="_black" href="#">5段（2+）</a>
+												<a target="_black" href="#">4段（1+）</a>
+												<a target="_black" href="#">6段</a>
+											</span>
+										</div>
+										<div class="right_shangpin">
+											<h5><a target="_black" href="#">纸尿裤/拉拉裤</a></h5>
+											<span>
+												<a target="_black" href="#">花王</a>
+												<a target="_black" href="#">尤妮佳</a>
+												<a target="_black" href="#">大王</a>
+												<a target="_black" href="#">好奇</a>
+												<a target="_black" href="#">妈咪宝贝</a>
+												<a target="_black" href="#">帮宝适</a>
+												<a target="_black" href="#">班博</a>
+												<a target="_black" href="#">科克兰</a>
+												<a target="_black" href="#">宝松怡</a>
+												<a target="_black" href="#">NB号</a>
+												<a target="_black" href="#">S号</a>
+												<a target="_black" href="#">M号</a>
+												<a target="_black" href="#">L号</a>
+												<a target="_black" href="#">XL号</a>
+												<a target="_black" href="#">XXL号</a>
+											</span>
+										</div>
+									</div>
+									<div class="pro2">
+										<div class="left_shangpin">
+											<h5><a target="_black" href="#">营养辅食</a></h5>
+											<span>
+												<a target="_black" href="#">辅食泥 </a>
+												<a target="_black" href="#">米粉米糊</a>
+												<a target="_black" href="#">泡芙</a>
+												<a target="_black" href="#">溶溶豆</a>
+												<a target="_black" href="#">营养品</a>
+												<a target="_black" href="#">饼干</a>
+												<a target="_black" href="#">肉松面仔</a>
+												<a target="_black" href="#">调味品</a>
+												<a target="_black" href="#">其他辅食</a>
+												<a target="_black" href="#">其他零食</a>
+											</span>
+										</div>
+										<div class="right_shangpin">
+											<h5><a target="_black" href="#">宝宝用品</a></h5>
+											<span>
+												<a target="_black" href="#">洗漱护肤</a>
+												<a target="_black" href="#">护理</a>
+												<a target="_black" href="#">喂养</a>
+												<a target="_black" href="#">出行</a>
+												<a target="_black" href="#">清洁消毒</a>
+												<a target="_black" href="#">文具图书</a>
+												<a target="_black" href="#">积木</a>
+												<a target="_black" href="#">益智玩具</a>
+												<a target="_black" href="#">其他玩具</a>
+												<a target="_black" href="#">宝宝家居</a>
+												<a target="_black" href="#">小家电</a>
+											</span>
+										</div>
+										
+									</div>
+									<div class="pro3">
+										<div class="left_shangpin">
+											<h5><a target="_black" href="#">童装童鞋</a></h5>
+											<span>
+												<a target="_black" href="#">童装</a>
+												<a target="_black" href="#">儿童配饰</a>
+												<a target="_black" href="#">童鞋</a>
+											</span>
+										</div>
+										<div class="right_shangpin">
+											<h5><a target="_black" href="#">孕妈必备</a></h5>
+											<span>
+												<a target="_black" href="#">营养</a>
+												<a target="_black" href="#">洗护</a>
+												<a target="_black" href="#">待产新生</a>
+												<a target="_black" href="#">穿戴</a>
+												<a target="_black" href="#">塑身</a>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="right">
+									<div class="logoList">
+										<ul>
+											<li><a target="_black" href="#"><img src="images/index/muying1.jpg"></a></li>
+											<li><a target="_black" href="#"><img src="images/index/muying2.jpg"></a></li>
+											<li><a target="_black" href="#"><img src="images/index/muying3.jpg"></a></li>
+										</ul>
+										<ul>
+											<li><a target="_black" href="#"><img src="images/index/muying4.jpg"></a></li>
+											<li><a target="_black" href="#"><img src="images/index/muying5.jpg"></a></li>
+											<li><a target="_black" href="#"><img src="images/index/muying6.jpg"></a></li>
+										</ul>
+										<ul>
+											<li><a target="_black" href="#"><img src="images/index/muying7.jpg"></a></li>
+											<li><a target="_black" href="#"><img src="images/index/muying8.jpg"></a></li>
+											<li><a target="_black" href="#"><img src="images/index/muying9.jpg"></a></li>
+										</ul>
+									</div>
+									<a target="_black" href="#" class="linkPic"><img src="images/index/muyingzhuanqu.jpg"></a>
+								</div>
+							</div>
+						</li>
+						<li><a target="_black" href=""><i class="iconfont icon-iconfonticon"></i>美容彩妆 ></a></li>
+						<li><a target="_black" href=""><i class="iconfont icon-xiebaofushi"></i>服饰鞋包 ></a></li>
+						<li><a target="_black" href=""><i class="iconfont icon-gehu"></i>家居个护 ></a></li>
+						<li><a target="_black" href=""><i class="iconfont icon-yingyangbaojian"></i>营养保健 ></a></li>
+						<li><a target="_black" href=""><i class="iconfont icon-haiwai"></i>海外直邮 ></a></li>
+						<li><a target="_black" href=""><i class="iconfont icon-shumajiadian"></i>数码家电 ></a></li>
+						<li><a target="_black" href=""><i class="iconfont icon-hotfood"></i>环球美食 ></a></li>
+						<li><a target="_black" href=""><i class="iconfont icon-huwaiyundong"></i>户外运动 ></a></li>
+						<li><a target="_black" href=""><i class="iconfont icon-shengxianshuiguo"></i>水果生鲜 ></a></li>
+					</ul>
+				</li>
+				<li><a target="_black" href="#">首页</a></li>
+				<li><a target="_black" href="#">今日限时购</a></li>
+				<li><a target="_black" href="#">每日上新</a></li>
+				<li><a target="_black" href="#">国家馆</a></li>
+				<li><a target="_black" href="#">全球旗舰</a></li>
+			</ul>
+		</div>	
+	</nav>
+	<main id="banner">
+	</main>
+	<section id="show">
+		<div class="container">
+			<ul>
+				<li><a target="_black" href="#"><i class="iconfont icon-zheng"></i>100%正品</a></li>
+				<li><a target="_black" href="#"><i class="iconfont icon-tui"></i>30天无忧退货</a></li>
+				<li><a target="_black" href="#"><i class="iconfont icon-free-shipping"></i>满88包邮（部分商品除外）</a></li>
+			</ul>
+			<span class="appL">
+				<i class="iconfont icon-shouji"></i>
+				<a target="_black" href="#">领考拉1000元新人，app下单更惠享手机价</a>
+			</span>
+		</div>
+	</section>
+	<div style="height:20px background-color:#eee;"></div>
+	<section id="mainMsg">
+		<ul class="hotList">
+			<li>
+				<div class="container">
+					<ul>
+						<li><a target="_black" href="#"><img src="images/index/hot1.jpg"></a></li>
+						<li><a target="_black" href="#"><img src="images/index/hot2.jpg"></a></li>
+						<li><a target="_black" href="#"><img src="images/index/hot3.jpg"></a></li>
+						<li><a target="_black" href="#"><img src="images/index/hot4.jpg"></a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<div class="xianshigou">
+			<div class="container">
+				<div class="shang">
+					<h5>今日限时购<span >本场还剩
+						<span class="daoJi">
+							<i></i>
+							<i></i>:
+							<i></i>
+							<i></i>:
+							<i></i>
+							<i></i>
+					    </span>
+					</span>
+						
+					</h5>
+					<span><a target="_black" href="#">进入限时购频道></a></span>
+				</div>
+				<div class="listp">
+					<ul>
+						<li>
+							<img src="images/index/xianshi1.jpg">
+							<div class="shuoming">
+								<h5><a target="_black" href="#">益智早教装饰贴</a></h5>
+								<a target="_black" href="#">Disney 迪士尼墙纸 米妮米奇 冰雪奇缘 字母贴 装饰益智幼儿园墙贴</a>
+								<div class="pricel">
+									￥13.9 <del>￥199</del><br>
+									<i>限量10件</i><br>
+									<button>立即抢购</button>
+								</div>
+							</div>
+						</li>
+						<li>
+							<img src="images/index/xianshi2.jpg">
+							<div class="shuoming">
+								<h5><a target="_black" href="#">益智早教装饰贴</a></h5>
+								<a target="_black" href="#">Disney 迪士尼墙纸 米妮米奇 冰雪奇缘 字母贴 装饰益智幼儿园墙贴</a>
+								<div class="pricel">
+									￥13.9 <del>￥199</del><br>
+									<i>限量10件</i><br>
+									<button>立即抢购</button>
+								</div>
+							</div>
+						</li>
+						<li>
+							<img src="images/index/xianshi3.jpg">
+							<div class="shuoming">
+								<h5><a target="_black" href="#">益智早教装饰贴</a></h5>
+								<a target="_black" href="#">Disney 迪士尼墙纸 米妮米奇 冰雪奇缘 字母贴 装饰益智幼儿园墙贴</a>
+								<div class="pricel">
+									￥13.9 <del>￥199</del><br>
+									<i>限量10件</i><br>
+									<button>立即抢购</button>
+								</div>
+							</div>
+						</li>
+						<li>
+							<img src="images/index/xianshi4.jpg">
+							<div class="shuoming">
+								<h5><a target="_black" href="#">益智早教装饰贴</a></h5>
+								<a target="_black" href="#">Disney 迪士尼墙纸 米妮米奇 冰雪奇缘 字母贴 装饰益智幼儿园墙贴</a>
+								<div class="pricel">
+									￥13.9 <del>￥199</del><br>
+									<i>限量10件</i><br>
+									<button>立即抢购</button>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<a target="_black" href="#"><img src="images/index/xianshigou.jpg"></a>
+				</div>
+			</div>		
+		</div>
+		<div class="new">
+			<div class="container">
+				<div class="shang">
+					<h5>每日上新<span>全世界好物，0点更新</span></h5>
+					<span><a target="_black" href="#">进入新品频道></a></span>	
+				</div>
+				<ul>
+					<li style="border-right: 0;"><a target="_black" href="#"><img src="images/index/new1.jpg"></a>
+						<p><a target="_black" href="#">让CK告诉你美式风格</a><br>
+							<a target="_black" href="#">专柜5折<span><</span></a>
+						</p>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/new2.jpg"></a>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/new3.jpg"></a>
+						<p class="price"><a target="_black" href="#">marcjanie 马克珍妮 女童T恤0-</a><br>￥49<del>￥158</del></p>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/new4.jpg"></a>
+						<p class="price"><a target="_black" href="#">marcjanie 马克珍妮 女童T恤0-</a><br>￥49<del>￥158</del></p>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/new5.jpg"></a>
+						<p class="price"><a target="_black" href="#">marcjanie 马克珍妮 女童T恤0-</a><br>￥49<del>￥158</del></p>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/new6.jpg"></a>
+						<p class="price"><a target="_black" href="#">marcjanie 马克珍妮 女童T恤0-</a><br>￥49<del>￥158</del></p>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/new7.jpg"></a>
+						<p class="price"><a target="_black" href="#">marcjanie 马克珍妮 女童T恤0-</a><br>￥49<del>￥158</del></p>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/new8.jpg"></a>
+						<p class="price"><a target="_black" href="#">marcjanie 马克珍妮 女童T恤0-</a><br>￥49<del>￥158</del></p>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/new9.jpg"></a>
+						<p class="price"><a target="_black" href="#">marcjanie 马克珍妮 女童T恤0-</a><br>￥49<del>￥158</del></p>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/new10.jpg"></a>
+						<p class="price"><a target="_black" href="#">marcjanie 马克珍妮 女童T恤0-</a><br>￥49<del>￥158</del></p>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/new11.jpg"></a>
+						<p class="price"><a target="_black" href="#">marcjanie 马克珍妮 女童T恤0-</a><br>￥49<del>￥158</del></p>
+					</li>
+					<li><a target="_black" href="#"></a>
+						<p class="price">￥<del>￥</del></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="remen">
+			<div class="container">
+				<div class="shang">
+					<h5>热门品牌<span>全球精选，一网打尽</span></h5>
+					<span><a target="_black" href="#">换一换<i class="iconfont icon-huanyihuan"></i></a></span>	
+				</div>
+				<ul class="littlelbt1"></ul>
+				<ul class="xiaptu">
+					<li><a target="_black"href="#"><img src="images/index/remen2.jpg"></a>
+						<p>德国“质”造，值得信赖</p>
+					</li>
+					<li><a target="_black"href="#"><img src="images/index/remen2.jpg"></a>
+						<p>德国“质”造，值得信赖</p>
+					</li>
+					<li><a target="_black"href="#"><img src="images/index/remen2.jpg"></a>
+						<p>德国“质”造，值得信赖</p>
+					</li>
+					<li><a target="_black"href="#"><img src="images/index/remen2.jpg"></a>
+						<p>德国“质”造，值得信赖</p>
+					</li>
+					<li><a target="_black"href="#"><img src="images/index/remen2.jpg"></a>
+						<p>德国“质”造，值得信赖</p>
+					</li>
+					<li><a target="_black"href="#"><img src="images/index/remen2.jpg"></a>
+						<p>德国“质”造，值得信赖</p>
+					</li>
+					<li><a target="_black"href="#"><img src="images/index/remen2.jpg"></a>
+						<p>德国“质”造，值得信赖</p>
+					</li>
+					<li><a target="_black"href="#"><img src="images/index/remen2.jpg"></a>
+						<p>德国“质”造，值得信赖</p>
+					</li>
+					<li><a target="_black"href="#"><img src="images/index/remen2.jpg"></a>
+						<p>德国“质”造，值得信赖</p>
+					</li>
+					<li><a target="_black"href="#"><img src="images/index/remen2.jpg"></a>
+						<p>德国“质”造，值得信赖</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div style="height:20px;background: #eee;"></div>
+		<div class="muying navlist" style="margin-top:52px;">
+			<div class="container">
+				<div class="shang">
+					<h5>母婴专区<span>热搜词：</span></h5>
+					<ul>
+						<li><a href="#">家居出行</a></li>
+						<li><a href="#">童装童鞋</a></li>
+						<li><a href="#">N元任选</a></li>
+						<li><a href="#">春季童装</a></li>
+						<li><a href="#">儿童床</a></li>
+						<li><a href="#">孕妈塑造</a></li>
+						<li><a href="#">防妊娠斑</a></li>
+					</ul>
+					<span><a target="_black" href="#">更多好货></a></span>	
+				</div>
+				<div class="tpmsg">
+					<div class="left">
+						<a target="_black" href="#"><img src="images/index/muyingBig.jpg"></a>
+						<ul>
+							<li><a target="_black" href="#">大牌奶粉</a></li>
+							<li><a target="_black" href="#">纸尿裤</a></li>
+							<li><a target="_black" href="#">洗护喂养</a></li>
+							<li><a target="_black" href="#">营养辅食</a></li>
+							<li><a target="_black" href="#">孕妈专区</a></li>
+							<li><a target="_black" href="#">玩具专区</a></li>
+						</ul>
+					</div>
+					<div class="center">
+						<ul>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+						</ul>
+					</div>
+					<div class="right">
+						<h5>最新热卖</h5>
+						<ul class="littleSer">
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_1.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_2.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_3.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_4.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_5.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_6.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_7.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_8.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_9.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_10.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_11.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_12.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div style="height:10px;background-color: #eee;"></div>
+				<div class="down">
+					<span>热卖品牌：</span>
+					<a target="_black" href="#"><img src="images/index/remaiup1.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup2.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup3.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup4.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup5.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup6.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup7.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup8.jpg"></a>
+				</div>
+			</div>
+		</div>
+		<div class="meirong navlist">
+			<div class="container">
+				<div class="shang">
+					<h5>美容彩妆<span>热搜词：</span></h5>
+					<ul>
+						<li><a href="#">家居出行</a></li>
+						<li><a href="#">童装童鞋</a></li>
+						<li><a href="#">N元任选</a></li>
+						<li><a href="#">春季童装</a></li>
+						<li><a href="#">儿童床</a></li>
+						<li><a href="#">孕妈塑造</a></li>
+						<li><a href="#">防妊娠斑</a></li>
+					</ul>
+					<span><a target="_black" href="#">更多好货></a></span>	
+				</div>
+				<div class="tpmsg">
+					<div class="left">
+						<a target="_black" href="#"><img src="images/index/muyingBig.jpg"></a>
+						<ul>
+							<li><a target="_black" href="#">大牌奶粉</a></li>
+							<li><a target="_black" href="#">纸尿裤</a></li>
+							<li><a target="_black" href="#">洗护喂养</a></li>
+							<li><a target="_black" href="#">营养辅食</a></li>
+							<li><a target="_black" href="#">孕妈专区</a></li>
+							<li><a target="_black" href="#">玩具专区</a></li>
+						</ul>
+					</div>
+					<div class="center">
+						<ul>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+						</ul>
+					</div>
+					<div class="right">
+						<h5>最新热卖</h5>
+						<ul class="littleSer">
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_1.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_2.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_3.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_4.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_5.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_6.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_7.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_8.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_9.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_10.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_11.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_12.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div style="height:10px;background-color: #eee;"></div>
+				<div class="down">
+					<span>热卖品牌：</span>
+					<a target="_black" href="#"><img src="images/index/remaiup1.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup2.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup3.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup4.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup5.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup6.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup7.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup8.jpg"></a>
+				</div>
+			</div>
+		</div>
+		<div class="xieshi navlist">
+			<div class="container">
+				<div class="shang">
+					<h5>鞋包服饰<span>热搜词：</span></h5>
+					<ul>
+						<li><a href="#">家居出行</a></li>
+						<li><a href="#">童装童鞋</a></li>
+						<li><a href="#">N元任选</a></li>
+						<li><a href="#">春季童装</a></li>
+						<li><a href="#">儿童床</a></li>
+						<li><a href="#">孕妈塑造</a></li>
+						<li><a href="#">防妊娠斑</a></li>
+					</ul>
+					<span><a target="_black" href="#">更多好货></a></span>	
+				</div>
+				<div class="tpmsg">
+					<div class="left">
+						<a target="_black" href="#"><img src="images/index/muyingBig.jpg"></a>
+						<ul>
+							<li><a target="_black" href="#">大牌奶粉</a></li>
+							<li><a target="_black" href="#">纸尿裤</a></li>
+							<li><a target="_black" href="#">洗护喂养</a></li>
+							<li><a target="_black" href="#">营养辅食</a></li>
+							<li><a target="_black" href="#">孕妈专区</a></li>
+							<li><a target="_black" href="#">玩具专区</a></li>
+						</ul>
+					</div>
+					<div class="center">
+						<ul>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+						</ul>
+					</div>
+					<div class="right">
+						<h5>最新热卖</h5>
+						<ul class="littleSer">
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_1.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_2.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_3.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_4.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_5.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_6.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_7.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_8.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_9.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_10.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_11.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_12.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div style="height:10px;background-color: #eee;"></div>
+				<div class="down">
+					<span>热卖品牌：</span>
+					<a target="_black" href="#"><img src="images/index/remaiup1.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup2.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup3.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup4.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup5.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup6.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup7.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup8.jpg"></a>
+				</div>
+			</div>
+		</div>
+		<div class="jiaju navlist">
+			<div class="container">
+				<div class="shang">
+					<h5>家居个护<span>热搜词：</span></h5>
+					<ul>
+						<li><a href="#">家居出行</a></li>
+						<li><a href="#">童装童鞋</a></li>
+						<li><a href="#">N元任选</a></li>
+						<li><a href="#">春季童装</a></li>
+						<li><a href="#">儿童床</a></li>
+						<li><a href="#">孕妈塑造</a></li>
+						<li><a href="#">防妊娠斑</a></li>
+					</ul>
+					<span><a target="_black" href="#">更多好货></a></span>	
+				</div>
+				<div class="tpmsg">
+					<div class="left">
+						<a target="_black" href="#"><img src="images/index/muyingBig.jpg"></a>
+						<ul>
+							<li><a target="_black" href="#">大牌奶粉</a></li>
+							<li><a target="_black" href="#">纸尿裤</a></li>
+							<li><a target="_black" href="#">洗护喂养</a></li>
+							<li><a target="_black" href="#">营养辅食</a></li>
+							<li><a target="_black" href="#">孕妈专区</a></li>
+							<li><a target="_black" href="#">玩具专区</a></li>
+						</ul>
+					</div>
+					<div class="center">
+						<ul>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+						</ul>
+					</div>
+					<div class="right">
+						<h5>最新热卖</h5>
+						<ul class="littleSer">
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_1.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_2.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_3.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_4.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_5.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_6.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_7.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_8.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_9.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_10.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_11.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_12.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div style="height:10px;background-color: #eee;"></div>
+				<div class="down">
+					<span>热卖品牌：</span>
+					<a target="_black" href="#"><img src="images/index/remaiup1.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup2.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup3.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup4.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup5.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup6.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup7.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup8.jpg"></a>
+				</div>
+			</div>
+		</div>
+		<div class="yingyang navlist">
+			<div class="container">
+				<div class="shang">
+					<h5>营养保健<span>热搜词：</span></h5>
+					<ul>
+						<li><a href="#">家居出行</a></li>
+						<li><a href="#">童装童鞋</a></li>
+						<li><a href="#">N元任选</a></li>
+						<li><a href="#">春季童装</a></li>
+						<li><a href="#">儿童床</a></li>
+						<li><a href="#">孕妈塑造</a></li>
+						<li><a href="#">防妊娠斑</a></li>
+					</ul>
+					<span><a target="_black" href="#">更多好货></a></span>	
+				</div>
+				<div class="tpmsg">
+					<div class="left">
+						<a target="_black" href="#"><img src="images/index/muyingBig.jpg"></a>
+						<ul>
+							<li><a target="_black" href="#">大牌奶粉</a></li>
+							<li><a target="_black" href="#">纸尿裤</a></li>
+							<li><a target="_black" href="#">洗护喂养</a></li>
+							<li><a target="_black" href="#">营养辅食</a></li>
+							<li><a target="_black" href="#">孕妈专区</a></li>
+							<li><a target="_black" href="#">玩具专区</a></li>
+						</ul>
+					</div>
+					<div class="center">
+						<ul>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+						</ul>
+					</div>
+					<div class="right">
+						<h5>最新热卖</h5>
+						<ul class="littleSer">
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_1.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_2.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_3.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_4.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_5.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_6.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_7.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_8.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_9.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_10.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_11.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_12.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div style="height:10px;background-color: #eee;"></div>
+				<div class="down">
+					<span>热卖品牌：</span>
+					<a target="_black" href="#"><img src="images/index/remaiup1.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup2.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup3.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup4.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup5.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup6.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup7.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup8.jpg"></a>
+				</div>
+			</div>
+		</div>
+		<div class="haiwai navlist">
+			<div class="container">
+				<div class="shang">
+					<h5>海外直邮<span>热搜词：</span></h5>
+					<ul>
+						<li><a href="#">家居出行</a></li>
+						<li><a href="#">童装童鞋</a></li>
+						<li><a href="#">N元任选</a></li>
+						<li><a href="#">春季童装</a></li>
+						<li><a href="#">儿童床</a></li>
+						<li><a href="#">孕妈塑造</a></li>
+						<li><a href="#">防妊娠斑</a></li>
+					</ul>
+					<span><a target="_black" href="#">更多好货></a></span>	
+				</div>
+				<div class="tpmsg">
+					<div class="left">
+						<a target="_black" href="#"><img src="images/index/muyingBig.jpg"></a>
+						<ul>
+							<li><a target="_black" href="#">大牌奶粉</a></li>
+							<li><a target="_black" href="#">纸尿裤</a></li>
+							<li><a target="_black" href="#">洗护喂养</a></li>
+							<li><a target="_black" href="#">营养辅食</a></li>
+							<li><a target="_black" href="#">孕妈专区</a></li>
+							<li><a target="_black" href="#">玩具专区</a></li>
+						</ul>
+					</div>
+					<div class="center">
+						<ul>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+						</ul>
+					</div>
+					<div class="right">
+						<h5>最新热卖</h5>
+						<ul class="littleSer">
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_1.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_2.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_3.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_4.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_5.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_6.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_7.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_8.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_9.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_10.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_11.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_12.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div style="height:10px;background-color: #eee;"></div>
+				<div class="down">
+					<span>热卖品牌：</span>
+					<a target="_black" href="#"><img src="images/index/remaiup1.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup2.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup3.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup4.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup5.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup6.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup7.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup8.jpg"></a>
+				</div>
+			</div>
+		</div>
+		<div class="shuma navlist">
+			<div class="container">
+				<div class="shang">
+					<h5>数码家电<span>热搜词：</span></h5>
+					<ul>
+						<li><a href="#">家居出行</a></li>
+						<li><a href="#">童装童鞋</a></li>
+						<li><a href="#">N元任选</a></li>
+						<li><a href="#">春季童装</a></li>
+						<li><a href="#">儿童床</a></li>
+						<li><a href="#">孕妈塑造</a></li>
+						<li><a href="#">防妊娠斑</a></li>
+					</ul>
+					<span><a target="_black" href="#">更多好货></a></span>	
+				</div>
+				<div class="tpmsg">
+					<div class="left">
+						<a target="_black" href="#"><img src="images/index/muyingBig.jpg"></a>
+						<ul>
+							<li><a target="_black" href="#">大牌奶粉</a></li>
+							<li><a target="_black" href="#">纸尿裤</a></li>
+							<li><a target="_black" href="#">洗护喂养</a></li>
+							<li><a target="_black" href="#">营养辅食</a></li>
+							<li><a target="_black" href="#">孕妈专区</a></li>
+							<li><a target="_black" href="#">玩具专区</a></li>
+						</ul>
+					</div>
+					<div class="center">
+						<ul>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+						</ul>
+					</div>
+					<div class="right">
+						<h5>最新热卖</h5>
+						<ul class="littleSer">
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_1.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_2.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_3.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_4.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_5.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_6.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_7.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_8.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_9.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_10.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_11.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_12.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div style="height:10px;background-color: #eee;"></div>
+				<div class="down">
+					<span>热卖品牌：</span>
+					<a target="_black" href="#"><img src="images/index/remaiup1.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup2.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup3.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup4.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup5.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup6.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup7.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup8.jpg"></a>
+				</div>
+			</div>
+		</div>
+		<div class="huanqiu navlist">
+			<div class="container">
+				<div class="shang">
+					<h5>环球美食<span>热搜词：</span></h5>
+					<ul>
+						<li><a href="#">家居出行</a></li>
+						<li><a href="#">童装童鞋</a></li>
+						<li><a href="#">N元任选</a></li>
+						<li><a href="#">春季童装</a></li>
+						<li><a href="#">儿童床</a></li>
+						<li><a href="#">孕妈塑造</a></li>
+						<li><a href="#">防妊娠斑</a></li>
+					</ul>
+					<span><a target="_black" href="#">更多好货></a></span>	
+				</div>
+				<div class="tpmsg">
+					<div class="left">
+						<a target="_black" href="#"><img src="images/index/muyingBig.jpg"></a>
+						<ul>
+							<li><a target="_black" href="#">大牌奶粉</a></li>
+							<li><a target="_black" href="#">纸尿裤</a></li>
+							<li><a target="_black" href="#">洗护喂养</a></li>
+							<li><a target="_black" href="#">营养辅食</a></li>
+							<li><a target="_black" href="#">孕妈专区</a></li>
+							<li><a target="_black" href="#">玩具专区</a></li>
+						</ul>
+					</div>
+					<div class="center">
+						<ul>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+						</ul>
+					</div>
+					<div class="right">
+						<h5>最新热卖</h5>
+						<ul class="littleSer">
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_1.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_2.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_3.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_4.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_5.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_6.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_7.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_8.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_9.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_10.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_11.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_12.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div style="height:20px;background-color: #eee;"></div>
+				<div class="down">
+					<span>热卖品牌：</span>
+					<a target="_black" href="#"><img src="images/index/remaiup1.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup2.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup3.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup4.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup5.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup6.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup7.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup8.jpg"></a>
+				</div>
+			</div>
+		</div>
+		<div class="huwai navlist">
+			<div class="container">
+				<div class="shang">
+					<h5>户外运动<span>热搜词：</span></h5>
+					<ul>
+						<li><a href="#">家居出行</a></li>
+						<li><a href="#">童装童鞋</a></li>
+						<li><a href="#">N元任选</a></li>
+						<li><a href="#">春季童装</a></li>
+						<li><a href="#">儿童床</a></li>
+						<li><a href="#">孕妈塑造</a></li>
+						<li><a href="#">防妊娠斑</a></li>
+					</ul>
+					<span><a target="_black" href="#">更多好货></a></span>	
+				</div>
+				<div class="tpmsg">
+					<div class="left">
+						<a target="_black" href="#"><img src="images/index/muyingBig.jpg"></a>
+						<ul>
+							<li><a target="_black" href="#">大牌奶粉</a></li>
+							<li><a target="_black" href="#">纸尿裤</a></li>
+							<li><a target="_black" href="#">洗护喂养</a></li>
+							<li><a target="_black" href="#">营养辅食</a></li>
+							<li><a target="_black" href="#">孕妈专区</a></li>
+							<li><a target="_black" href="#">玩具专区</a></li>
+						</ul>
+					</div>
+					<div class="center">
+						<ul>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+							<li>
+								<p><a target="_black" href="#"></a>用品N元任选<br>
+									<a href="#" target="_black">最高任选9件</a></p>
+								<a target="_black"href="#"><img src="images/index/muyingli1"></a></li>
+						</ul>
+					</div>
+					<div class="right">
+						<h5>最新热卖</h5>
+						<ul class="littleSer">
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_1.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_2.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_3.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_4.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_5.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_6.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_7.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_8.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_9.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>		
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_10.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_11.jpg"></a>
+									<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+								<div>
+									<a target="_black" href="#"><img src="images/index/littlelbt2_12.jpg"></a>
+										<div class="nei">
+										<a target="_black" href="#">【官方直采】Merries 花王妙而舒 S 82片/</a><br>
+										￥13.9 <del>￥199</del>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div style="height:10px;background-color: #eee;"></div>
+				<div class="down">
+					<span>热卖品牌：</span>
+					<a target="_black" href="#"><img src="images/index/remaiup1.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup2.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup3.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup4.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup5.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup6.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup7.jpg"></a>
+					<a target="_black" href="#"><img src="images/index/remaiup8.jpg"></a>
+				</div>
+			</div>
+		</div>
+		<div style="height:20px;background: #eee;"></div>
+		<div class="guesslike">
+			<div class="container">
+			    <h5>猜你喜欢<span>根据您的浏览记录推荐的商品</span></h5>
+				<ul>
+					<li><a target="_black" href="#"><img src="images/index/guess1.jpg"></a>
+						<div class="liaojie">
+							<p><a target="_black" href="#">A.H.C 第四代蓝金全脸修护眼霜 30毫升 一支涂全脸</a></p>
+							<p>立省4元</p>
+							<p>￥79 <del>￥170</del><span>11688 人已评价</span></p>
+						</div>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/guess2.jpg"></a>
+						<div class="liaojie">
+							<p><a target="_black" href="#">A.H.C 第四代蓝金全脸修护眼霜 30毫升 一支涂全脸</a></p>
+							<p>立省4元</p>
+							<p>￥79 <del>￥170</del><span>11688 人已评价</span></p>
+						</div>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/guess3.jpg"></a>
+						<div class="liaojie">
+							<p><a target="_black" href="#">A.H.C 第四代蓝金全脸修护眼霜 30毫升 一支涂全脸</a></p>
+							<p>立省4元</p>
+							<p>￥79 <del>￥170</del><span>11688 人已评价</span></p>
+						</div>
+					</li>
+					<li><a target="_black" href="#"><img src="images/index/guess4.jpg"></a>
+						<div class="liaojie">
+							<p><a target="_black" href="#">A.H.C 第四代蓝金全脸修护眼霜 30毫升 一支涂全脸</a></p>
+							<p>立省4元</p>
+							<p>￥79 <del>￥170</del><span>11688 人已评价</span></p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<nav id="botNav">
+		<div class="container">
+			<ul class="uplist">
+				<li><i class="iconfont icon-zheng"></i>
+					<span><h4>100%正品</h4>
+					正品保障 假一赔</span>
+				</li>
+				<li><i class="iconfont icon-feiji"></i>
+					<span><h4>低价保障</h4>缩减中间环节 确保低价</span>
+				</li>
+				<li><i class="iconfont icon-tui"></i>
+					
+					<span><h4>30天无忧退货</h4>国内退货 售后无忧</span>
+				</li>
+				<li><i class="iconfont icon-free-shipping">	
+				</i><span><h4>满88包邮</h4>部分特殊商品除外</span></li>
+			</ul>
+			<ul class="downlist">
+				<li>
+					<img src="images/index/logo.bmp">
+					<br>
+					关注我们
+					<i class="iconfont icon-weibo">
+						<img src="images/index/erwei.jpg">
+					</i>
+					<i class="iconfont icon-weixin1">
+						<img src="images/index/erwei.jpg">
+					</i>
+					<i class="iconfont icon-QQ">
+						<img src="images/index/erwei.jpg">
+					</i>
+				</li>
+				<li>
+					<h4><a target="_black" href="#">考拉保障</a></h4>
+				    <p><a target="_black" href="#">假一赔十</a></p>
+					<p><a target="_black" href="#">廉正监督</a></p>
+				</li>
+				<li>
+					<h4><a target="_black" href="#">新手指南</a></h4>
+				    <p><a target="_black" href="#">购物流程</a></p>
+					<p><a target="_black" href="#">支付方式</a></p>
+					<p><a target="_black" href="#">通关税费</a></p>
+					<p><a target="_black" href="#">常见问题</a></p>
+				</li>
+				<li>
+					<h4><a target="_black" href="#">售后服务</a></h4>
+				    <p><a target="_black" href="#">退货政策</a></p>
+					<p><a target="_black" href="#">退货流程</a></p>
+					<p><a target="_black" href="#">退款说明</a></p>
+					<p><a target="_black" href="#">联系客服</a></p>
+				</li>
+				<li>
+					<h4><a target="_black" href="#">物流配送</a></h4>
+				    <p><a target="_black" href="#">配送方式</a></p>
+					<p><a target="_black" href="#">配送服务</a></p>
+					<p><a target="_black" href="#">运费标准</a></p>
+					<p><a target="_black" href="#">物流跟踪</a></p>
+				</li>
+				<li>
+					<h4><a target="_black" href="#">关于我们</a></h4>
+				    <p><a target="_black" href="#">联系我们</a></p>
+					<p><a target="_black" href="#">招商合作</a></p>
+					<p><a target="_black" href="#">销售联盟</a></p>
+					<p><a target="_black" href="#">CEO邮箱</a></p>
+				</li>
+				<li>
+					<img src="images/index/erwei.jpg"><br>
+					扫描下载手机版
+				</li>
+			</ul>
+		</div>		
+	</nav>
+	<footer>
+		<div class="container">
+			<div><a target="_blcak" href="#">About NetEase</a> - <a target="_blcak" href="#">公司简介</a> - <a target="_blcak" href="#">联系方法</a> - <a target="_blcak" href="#">友情链接</a> - <a target="_blcak" href="#">招聘信息</a> - <a target="_blcak" href="#">客户服务</a> - <a target="_blcak" href="#">隐私政策</a> - <a target="_blcak" href="#">网络营销</a> - <a target="_blcak" href="#">网站地图</a> - <a target="_blcak" href="#">网易考拉海购</a>
+			</div>
+			<ul>
+				<li>网络文化经营许可证：浙网文[2016]0155-055号</li> 
+				<li>增值电信业务经营许可证：浙B2-20090185-3</li>
+				<li>出版物经营许可证：新出发浙杭经零字第00136号</li><li> 食品经营许可证：JY13301860112412 </li>
+			</ul>
+			<ul><li>
+					<img src="images/index/foot3.png">
+					<a target="_black" href="#" style="color:#fff;"> 浙公网安备 33010002000066号</a>
+				</li>
+				<li>
+					网易公司版权所有©1997-2017
+				</li>
+			</ul>
+			<img src="images/index/foot.png"><img src="images/index/foot2.gif">
+		</div>
+	</footer>
+	<ul id="rightlist">
+		<li><a target="_black" href="#"><i class="iconfont icon-hongqi"></i><br>签到</a></li>
+		<li><span class="count">0</span><a target="_black" href="html/shopCar.html"><i class="iconfont icon-gouwuchekong"></i><br>购物车</a></li>
+		<li><a target="_black" href="#"><i class="iconfont icon-shouji"></i><br>APP</a></li>
+		<li><a target="_black" href="#">TOP</a></li>
+	</ul>
+	<ul id="leftlist">
+		<li><img src="images/index/maiyou.bmp"></li>
+		<li><a href="#">今日限时购</a></li>
+		<li><a href="#">每日上新</a></li>
+		<li><a href="#">热门品牌</a></li>
+		<li><a href="#">母婴专区</a></li>
+		<li><a href="#">美容彩妆</a></li>
+		<li><a href="#">服饰鞋包</a></li>
+		<li><a href="#">家居个护</a></li>
+		<li><a href="#">营养保健</a></li>
+		<li><a href="#">海外直邮</a></li>
+		<li><a href="#">数码家电</a></li>
+		<li><a href="#">户外运动</a></li>
+		<li><a href="#">环球美食</a></li>
+		<li><img src="images/index/apperweima.bmp"></li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+    <link rel="stylesheet" href="../css/shopcar.css">
+    <link rel="stylesheet" href="../font/iconfont.css">
+    <script src="../lib/jquery-3.1.1.js"></script>
+    <script src="../js/common.js"></script>
+    <script>
+        $(function(){
+            $('.quyu').on('click',function(){
+            $('.tab').show();
+            });
+            var $tab = $('.tab');
+            var $content = $tab.find('.content');
+            var $title = $tab.children('.title');
+            // 显示第一个div
+            $content.children().eq(0).show();
+            // 高亮第一个tab
+            $title.children().eq(0).addClass('active');
+            // 绑定点击事件
+            $title.on('click','>span',function(){
+                // 获取索引值
+                var idx = $(this).index();
+                // tab高亮
+                $(this).addClass('active').siblings().removeClass('active');
+                $content.children().hide().eq(idx).slideDown();
+            });
+
+            //读取cookie
+            var goodlist = getCookie('carlist');
+            goodlist = JSON.parse(goodlist);
+            //判断购物车是否为空
+            if(goodlist.length){
+                $('.kongche').hide();
+                $('.feikong').show();
+            }
+            //种类数量
+            $('#count').html(goodlist.length);
+
+            var $ul = $('.msgList');
+            var total = 0;
+            $ul.html(goodlist.map(function(item,index){
+                var danjia = parseInt(item.x_price)*item.qty;
+                total  += danjia;
+                return  `<li>
+                           <div class="ziying">
+                                <input type="checkbox"><img src="../images/car/ziying.bmp"><span>自营保税仓</span>
+                            </div>
+                            <div class="up_div">
+                                <div class="xuanze">
+                                    <input type="checkbox" class="qx_btn">
+                                </div>
+                                <div class="shangpinxinxi">
+                                    <a href="details.html"><img src=${item.imgurl} class="mypic"></a>
+                                    <h3 class="sp_name">${item.name}</h3>
+                                </div>
+                                <div class="_price">
+                                    <del class="y_price">${item.y_price}</del>
+                                    <span class="x_price">${item.x_price}</span>
+                                </div>
+                                <div class="qty_change">
+                                        <span class="jian">-</span>
+                                        <span class="qty_count">${item.qty}</span>
+                                        <span class="jia">+</span>
+                                </div>
+                                <div class="totalPrice">${danjia}</div>
+                                <div class="btn_del">
+                                    <a href="#" class="scdgsp">删除</a><br>
+                                    <span>移入收藏夹</span>
+                                </div>
+                            </div>
+                            <div class="down_div">
+                                <p>活动优惠：-￥0.00商品应付总计：<span class="dangeTotal"></span>
+                            </div>
+                        </li>`;
+            }).join(''));
+
+            //计算总价
+            $('#total').html(total);
+
+            //获取页面上所有的checkbox
+            var $checkbox = $('.feikong :checkbox');
+            $('.qx').on('click',function(){
+                //全选被选，不写默认true
+                var checkAll = $('.qx').prop('checked');
+                $checkbox.prop('checked',checkAll);
+            });
+
+            //删除页面上所有商品
+            $('#delcookie').on('click',function(){
+                $ul.remove();
+                removeCookie('carlist');
+                location.reload();
+            })
+
+            //事件委托删除单个商品
+            $ul.on('click','.scdgsp',function(){
+
+                var li = $('.scdgsp').parents('li');
+                var src = li.find('img.mypic').attr('src');
+
+                li.remove();
+                //清除对应商品的cookie
+                for(var i=0;i<goodlist.length;i++){
+                    if(goodlist[i].imgurl === src){
+                        goodlist.splice(i,1);
+                        break;
+                    }
+                }
+                // 删除后重写cookie
+                setCookie('carlist',JSON.stringify(goodlist));
+
+                location.reload();
+            })
+
+            //事件委托数量减
+            $ul.on('click','.jian',function() {
+                var li = $('.scdgsp').parents('li');
+                var count = li.find('span.qty_count');
+                //作为判断条件存在，判断当前点击的是属于哪一行的能容
+                var src = li.find('img.mypic').attr('src');
+                var sljian = parseInt(count.html());
+                sljian--;
+                if (sljian <= 1) {
+                    sljian = 1;
+                }
+                count.html(sljian);
+                //改变当前对应商品的cookie
+                for (var i = 0; i < goodlist.length; i++) {
+                    if (goodlist[i].imgurl === src) {
+
+                        goodlist[i].qyt--;
+
+                        if (goodlist[i].qyt <= 1) {
+                            goodlist[i].qty = 1;
+                        }
+                        break;
+                    }
+                    setCookie('carlist',JSON.stringify(goodlist));
+                }
+                 //改变后重写cookie
+//                location.reload();
+            });
+
+            //事件委托数量加
+            $ul.on('click','.jia',function() {
+                var li = $('.scdgsp').parents('li');
+                var count = li.find('span.qty_count');
+                //作为判断条件存在，判断当前点击的是属于哪一行的能容
+                var src = li.find('img.mypic').attr('src');
+                var sljian = parseInt(count.html());
+                sljian++;
+                count.html(sljian);
+                //改变当前对应商品的cookie
+                for (var i = 0; i < goodlist.length; i++) {
+                    if (goodlist[i].imgurl === src) {
+                        goodlist[i].qyt++;
+                        break;
+                    }
+                    setCookie('carlist',JSON.stringify(goodlist));
+                }
+                //改变后重写cookie
+
+//                location.reload();
+            });
+        })
+    </script>
+</head>
+<body>
+    <header id="topheader">
+        <div class="container">
+            <h5>考拉欢迎你！</h5>
+            <ul class="logMsg">
+                <li><a target="_black" href="login.html">登录</a></li>
+                <li><a target="_black" href="register.html">注册</a></li>
+                <li><a href="#"><i class="iconfont icon-shouji"></i>手机考拉海购</a></li>
+            </ul>
+            <ul class="orMsg">
+                <li><a href=""><i class="iconfont icon-hongqi"></i>每日签到</a></li>
+                <li><a href="">我的订单</a></li>
+                <li><a href="">个人中心 ></a>
+                    <ul class="self">
+                        <li><a target="_black" href="#">我的优惠券</a></li>
+                        <li><a target="_black" href="#">我的考拉豆</a></li>
+                        <li><a target="_black" href="#">账户安全</a></li>
+                        <li><a target="_black" href="#">我的实名认证</a></li>
+                        <li><a target="_black" href="#">我收藏的商品</a></li>
+                        <li><a target="_black" href="#">我关注的品牌</a></li>
+                        <li><a target="_black" href="#">售后管理</a></li>
+                    </ul>
+                </li>
+                <li><a href="">客户服务></a>
+                    <ul class="server">
+                        <li><a target="_black" href="#">联系客服</a></li>
+                        <li><a target="_black" href="#">帮助中心</a></li>
+                    </ul>
+                </li>
+                <li><a href="">充值中心></a>
+                    <ul class="chongzhi">
+                        <li><a target="_black" href="#">话费充值</a></li>
+                        <li><a target="_black" href="#">游戏充值</a></li>
+                    </ul>
+                </li>
+                <li><a target="_black" href="#">消费者告知书</a></li>
+                <li class="last"><a href="">更多></a>
+                    <ul class="more">
+                        <li><a target="_black" href="#">收藏本站</a></li>
+                        <li><a target="_black" href="#">新浪微博</a></li>
+                        <li><a target="_black" href="#">微信公众号</a></li>
+                        <li><a target="_black" href="#">易信公众号 </a></li>
+                        <li><a target="_black" href="#">招商合作</a></li>
+                        <li><a target="_black" href="#">考拉招聘</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="top">
+                <a href="../index.html"><img src="../images/index/logo.bmp" alt=""></a>
+            </div>
+            <div class="msg">
+                <div class="kongche">
+                    <i class="iconfont icon-gouwuchekong"></i>
+                    <div class="csxx">
+                        购物车里空空如也，赶紧去 <a href="../index.html">逛逛吧></a>
+                        或者您可以先进行 <a href="login.html">登录></a>
+                    </div>
+                </div>
+                <div class="feikong">
+                    <div class="tou">
+                        <span>我的购物车</span>
+                        <span id="count"></span>
+                        <span><img src="../images/car/guangbo.bmp" alt="">考拉自营商品满88包邮，<span>再购30.00元包邮 ?</span></span>
+                        <div class="address">配送至
+                            <div class="quyu">
+                                <div class="tab" >
+                                    <div class="title">
+                                        <span>省份</span>
+                                        <span>城市</span>
+                                        <span>县区</span>
+                                        <b id="close_btn">&times;</b>
+                                    </div>
+                                    <div class="content">
+                                        <div class="sf">
+                                            <span style="color:#ccc;">华北:</span>
+                                            <span>北京</span> <span>天津</span> <span>河北</span>
+                                            <span>山西</span> <span>内蒙</span> <br>
+                                            <span style="color:#ccc;">华东:</span>
+                                            <span>上海</span> <span>江苏</span> <span>浙江</span>
+                                            <span>安徽</span> <span>福建</span> <span>山东</span> <br>
+                                            <span style="color:#ccc;">华南:</span><span>广东</span> <span>广西</span>  <span>海南</span> <br>
+                                            <span style="color:#ccc;">华中:</span>
+                                            <span>江西</span> <span>河南</span> <span>湖北</span>
+                                            <span>湖南</span> <br>
+                                            <span style="color:#ccc;">西南:</span> <span>重庆</span> <span>四川</span> <span>贵州</span>
+                                            <span>云南</span> <span>西藏</span> <br>
+                                            <span style="color:#ccc;">西北:</span> <span>陕西</span> <span>宁夏</span> <span>青海</span>
+                                            <span>甘肃</span> <span>新疆</span> <br>
+                                            <span style="color:#ccc;">东北:</span> <span>辽宁</span> <span>吉林</span> <span>黑龙江</span>
+                                        </div>
+                                        <div class="cs">
+                                            <span>西安市</span>
+                                            <span>铜川市</span>
+                                            <span>宝鸡市</span>
+                                            <span>咸阳市</span><br>
+                                            <span>渭南市</span>
+                                            <span>延安市</span>
+                                            <span>汉中市</span>
+                                            <span>榆林市</span><br>
+                                            <span>安康市</span>
+                                            <span>商洛市</span>
+                                        </div>
+                                        <div class="xq">
+                                            <span>东城区</span>
+                                            <span>西城区</span>
+                                            <span>朝阳区</span>
+                                            <span>丰台区</span><br>
+                                            <span>石景山区</span>
+                                            <span>海淀区</span>
+                                            <span>门头沟区</span>
+                                            <span>房山区</span><br>
+                                            <span>通州区</span>
+                                            <span>顺义区</span>
+                                            <span>昌平区</span>
+                                            <span>大兴区</span><br>
+                                            <span>怀柔区</span>
+                                            <span>平谷区</span>
+                                            <span>密云县</span>
+                                            <span>延庆县</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="msgNav">
+                        <div><input type="checkbox" class="qx">全选</div>
+                        <div>商品信息</div>
+                        <div>单价（元）</div>
+                        <div>数量</div>
+                        <div>金额（元）</div>
+                        <div>操作</div>
+                    </div>
+                    <ul class="msgList">
+                    </ul>
+                    <div class="pay">
+                        <div class="leftl">
+                            <input type="checkbox" class="qx">全选 <span id="delcookie">删除选中商品</span>
+                        </div>
+                        <div class="centerl">
+                            <p>已选商品 <span id="jianshu"></span> 件 总价(不含运费)：<span id="total"> </span></p>
+                            <p>活动优惠：-￥0.00商品应付总计：<span class="totalPrice"> </span></p>
+                        </div>
+                        <div class="gobuy">
+                            <button>去结算</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="guesslike">
+                <h4>猜你喜欢 <span>根据你的浏览记录推荐的商品</span></h4>
+                <div class="sp">
+                    <div>
+                        <a href="#"><img src="../images/car/1.jpg"></a>
+                        <p><a href="#">NATURE REPUBLIC 自然乐园 舒缓保湿芦荟胶 300毫升</a></p>
+                        <p>99元任选4件</p>
+                        <span>¥33.9<del>¥89</del></span><br>
+                        <a href="#">已有2233评价</a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="../images/car/2.jpg"></a>
+                        <p><a href="#">MEDIHEAL 美迪恵尔 N.M.F针剂水库保湿面膜 10片/盒 补水网红</a></p>
+                        <p>满259元减30元</p>
+                        <span>¥89<del>¥169</del></span><br>
+                        <a href="#">已有2233评价</a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="../images/car/3.jpg"></a>
+                        <p><a href="#">NATURE REPUBLIC 自然乐园 舒缓保湿芦荟胶 300毫升</a></p>
+                        <p>99元任选4件</p>
+                        <span>¥33.9<del>¥89</del></span><br>
+                        <a href="#">已有2233评价</a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="../images/car/4.jpg"></a>
+                        <p><a href="#">NATURE REPUBLIC 自然乐园 舒缓保湿芦荟胶 300毫升</a></p>
+                        <p>99元任选4件</p>
+                        <span>¥33.9<del>¥89</del></span><br>
+                        <a href="#">已有2233评价</a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="../images/car/5.jpg"></a>
+                        <p><a href="#">NATURE REPUBLIC 自然乐园 舒缓保湿芦荟胶 300毫升</a></p>
+                        <p>99元任选4件</p>
+                        <span>¥33.9<del>¥89</del></span><br>
+                        <a href="#">已有2233评价</a>
+                    </div>
+                </div>
+            </div>
+            <div class="allbuy">
+                <h4>大家都在买 <span>全网最热门的商品推荐</span></h4>
+                <div class="sp">
+                    <div>
+                        <a href="#"><img src="../images/car/6.jpg"></a>
+                        <p><a href="#">NATURE REPUBLIC 自然乐园 舒缓保湿芦荟胶 300毫升</a></p>
+                        <p>99元任选4件</p>
+                        <span>¥33.9<del>¥89</del></span><br>
+                        <a href="#">已有2233评价</a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="../images/car/7.jpg"></a>
+                        <p><a href="#">NATURE REPUBLIC 自然乐园 舒缓保湿芦荟胶 300毫升</a></p>
+                        <p>99元任选4件</p>
+                        <span>¥33.9<del>¥89</del></span><br>
+                        <a href="#">已有2233评价</a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="../images/car/8.jpg"></a>
+                        <p><a href="#">NATURE REPUBLIC 自然乐园 舒缓保湿芦荟胶 300毫升</a></p>
+                        <p>99元任选4件</p>
+                        <span>¥33.9<del>¥89</del></span><br>
+                        <a href="#">已有2233评价</a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="../images/car/9.jpg"></a>
+                        <p><a href="#">NATURE REPUBLIC 自然乐园 舒缓保湿芦荟胶 300毫升</a></p>
+                        <p>99元任选4件</p>
+                        <span>¥33.9<del>¥89</del></span><br>
+                        <a href="#">已有2233评价</a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="../images/car/10.jpg"></a>
+                        <p><a href="#">NATURE REPUBLIC 自然乐园 舒缓保湿芦荟胶 300毫升</a></p>
+                        <p>99元任选4件</p>
+                        <span>¥33.9<del>¥89</del></span><br>
+                        <a href="#">已有2233评价</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div><a target="_blcak" href="#">About NetEase</a> - <a target="_blcak" href="#">公司简介</a> - <a target="_blcak" href="#">联系方法</a> - <a target="_blcak" href="#">友情链接</a> - <a target="_blcak" href="#">招聘信息</a> - <a target="_blcak" href="#">客户服务</a> - <a target="_blcak" href="#">隐私政策</a> - <a target="_blcak" href="#">网络营销</a> - <a target="_blcak" href="#">网站地图</a> - <a target="_blcak" href="#">网易考拉海购</a>
+            </div>
+            <ul>
+                <li>网络文化经营许可证：浙网文[2016]0155-055号</li>
+                <li>增值电信业务经营许可证：浙B2-20090185-3</li>
+                <li>出版物经营许可证：新出发浙杭经零字第00136号</li><li> 食品经营许可证：JY13301860112412 </li>
+            </ul>
+            <ul><li>
+                <img src="../images/index/foot3.png">
+                <a target="_black" href="#" style="color:#fff;"> 浙公网安备 33010002000066号</a>
+            </li>
+                <li>
+                    网易公司版权所有©1997-2017
+                </li>
+            </ul>
+            <img src="../images/index/foot.png"><img src="../images/index/foot2.gif">
+        </div>
+    </footer>
+</body>
+</html>

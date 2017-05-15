@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>网易账号中心</title>
+	<link rel="stylesheet" type="text/css" href="../font/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../css/register.css">
+
+	<script src="../lib/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="../lib/jquery/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../lib/jquery-confirm/jquery-confirm.js"></script>
+	<script>
+		$(function(){
+			//失去焦点时判断
+			$('#email').on('change',function(){
+				var email = $('#email').val();
+				if(!/^\d{6,18}$/.test(email)){					
+					$('#email').addClass('error');		
+				}else{
+					$('#email').addClass('success');
+				}
+			});
+
+			$('#pwd').on('change',function(){
+				var password = $('#pwd').val();
+				if(!/^\S{6,16}$/.test(password)){
+					
+					$('#pwd').addClass('error');
+					
+				}else{
+					$('#pwd').addClass('success');
+				}
+			});
+
+			$('#pwdr').on('change',function(){
+				var pwdr = $('#pwdr').val();
+				var password = $('#pwd').val();
+				var reg = new RegExp(password);
+				if(!reg.test(pwdr)){
+					alert('两次密码输入不一致');
+					$('#pwdr').addClass('error');
+					return false; 
+				}else{
+					$('#pwdr').addClass('success')
+				}
+			});
+
+			$('#phone').on('change',function(){
+				var tel = $('#phone').val();
+				if(!/^1[34578]\d{9}$/.test(tel)){
+					
+					$('#phone').addClass('error');
+					
+				}else{
+					$('#phone').addClass('success')
+				}
+			});
+
+			$('#submit').on('click',function(){
+				$.post('../api/register.php',{
+					email:$('#email').val()+$('select').val(),
+					password:$('#pwd').val(),
+					phone:$('#phone').val()
+				},function(response){
+					var $obj = eval('('+ response +')');
+					if($obj.state){
+						$.alert('注册成功！');
+						window.location.href = '../index.html';
+					}else{
+						$.alert($obj.message);
+					}
+				})
+			})
+
+		})
+	</script>
+</head>
+<body>
+	<header id="top">
+		<div class="container">
+			<h3><a target="_black" href="#"><i class="iconfont icon-wangyi"></i>邮箱帐号</a></h3>
+			<div>已有帐号？<a target="_black" href="login.html">去<span>登陆</span></a></div>
+		</div>
+	</header>
+	<main id="mainMsg">
+		<div class="container">
+			<h5>注册帐号</h5>
+			<div class="zhanghao">
+				<label for="email">帐号：</label>
+				<input type="text" id="email" name="email" placeholder="6-18位数组组合" required></input>
+				<select>
+					<option value="@163.com">@163.com</option>
+					<option value="@126.com">@126.com</option>
+					<option value="@yeah.com">@yeah.com</option>
+				</select>
+			</div>
+			<div class="mima">
+				<label for="pwd">密码：</label>
+				<input type="password" id="pwd" name="password" placeholder="6-16位密码，区分大小写" required></input>
+			</div>
+			<div class="repeatmima">
+				<label for="pwdr">确认密码：</label>
+				<input type="password" id="pwdr" name="password" placeholder="再次输入密码" required></input>
+			</div>
+			<div class="yzm">
+				<label for="yanzhengma">验证码：</label>
+				<input type="text" id="yanzhengma" name="yanzhengma" required></input>
+			</div>
+			<div class="shouji">
+				<label for="phone">手机:</label>
+				<input type="text" id="phone" name="phone" placeholder="输入手机号"></input>
+				<br>
+				<p><a target="_black" href="#">切换到国际手机</a></p>
+				<p>忘记密码时，可通过手机快速找回密码</p>
+			</div>
+			<div class="dxyzm">
+				<label for="duanxin">短信验证码：</label>
+				<input tyoe="text" id="duanxin" name="duanxin" placeholder="输入短信验证码"></input>
+				<button>获取验证码</button>
+			</div>
+			<div class="register">
+				<button id="submit">注册</button>
+			</div>
+			<div class="xieyi">
+				<input type="checkbox"><a target="_black" href="#">用户勾选即代表同意《服务条款》和《网络游戏用户隐私保护和个人信息利用政策》</a></input>
+			</div>			
+			<a target="_black" href="#"><img src="../images/register/pic.png"></a>
+		</div>
+	</main>
+	<footer></footer>
+</body>
+</html>

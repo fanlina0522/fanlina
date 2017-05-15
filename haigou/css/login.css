@@ -1,0 +1,206 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 1090px;
+  margin: 0 auto;
+}
+
+.top {
+  height: 100px;
+  background-color: #fff;
+  position: relative;
+}
+
+.top .rightImg {
+  border: 0;
+  position: absolute;
+  top: 25px;
+  right: 80px;
+}
+
+.top .leftImg {
+  border: 0;
+  position: absolute;
+  top: 25px;
+  left: 50px;
+}
+
+.center {
+  border-top: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+}
+
+.center .container {
+  position: relative;
+  height: 520px;
+}
+
+.center .container > a {
+  position: absolute;
+  top: 140px;
+  left: 80px;
+}
+
+.center .container > a img {
+  border: 0;
+}
+
+.center .container .logForm {
+  background-color: #fff;
+  width: 350px;
+  height: 354px;
+  position: absolute;
+  top: 66px;
+  left: 565px;
+  border: 1px solid #ddd;
+}
+
+.center .container .logForm .up {
+  padding: 20px 0 0 30px;
+}
+
+.center .container .logForm .up h1 {
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+
+.center .container .logForm .up .user, .center .container .logForm .up .pwd {
+  width: 270px;
+  height: 36px;
+  position: relative;
+  border: 1px solid #ccc;
+  margin: 10px 0 15px 0;
+}
+
+.center .container .logForm .up .user input, .center .container .logForm .up .pwd input {
+  outline: none;
+  border: 0;
+  height: 34px;
+}
+
+.center .container .logForm .up .user > i, .center .container .logForm .up .pwd > i {
+  display: inline-block;
+  border-right: 1px solid #ccc;
+  width: 36px;
+  height: 36px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.center .container .logForm .up .mdl {
+  position: relative;
+}
+
+.center .container .logForm .up .mdl > a {
+  position: absolute;
+  right: 44px;
+}
+
+.center .container .logForm .up button {
+  width: 272px;
+  height: 44px;
+  border: 0;
+  font-size: 20px;
+  color: #fff;
+  margin: 15px 0 15px 0;
+  background-color: #E41436;
+}
+
+.center .container .logForm .up .emlink {
+  text-align: center;
+  font-size: 12px;
+}
+
+.center .container .logForm .ortherLog {
+  margin-top: 20px;
+  padding: 0 68px 0 22px;
+  position: relative;
+  line-height: 36px;
+  font-size: 14px;
+  border-top: 1px solid #ccc;
+}
+
+.center .container .logForm .ortherLog ul {
+  position: absolute;
+  left: 170px;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 38px;
+}
+
+.center .container .logForm .ortherLog ul li {
+  float: left;
+  padding: 0 12px 0 0;
+}
+
+.center .container .logForm .ortherLog ul li:nth-of-type(1) > a {
+  color: #0BB00C;
+}
+
+.center .container .logForm .ortherLog ul li:nth-of-type(2) > a {
+  color: #0692DF;
+}
+
+.center .container .logForm .ortherLog ul li:nth-of-type(3) > a {
+  color: #B83E2F;
+}
+
+.center .container .logForm .ortherLog ul li:nth-of-type(4) > a {
+  color: #409FE1;
+}
+
+.center .container .logForm .ortherLog ul li:nth-of-type(4) > a > i {
+  border-right: 0;
+}
+
+.center .container .logForm .ortherLog ul li i {
+  text-align: center;
+  line-height: 20px;
+  padding-right: 10px;
+  border-right: 1px solid #ccc;
+  display: inline-block;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.center .container .applink {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  display: inline-block;
+  width: 148px;
+  height: 354px;
+  position: absolute;
+  top: 66px;
+  left: 915px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.center .container .applink .text {
+  position: absolute;
+  top: 58%;
+  left: 18px;
+}
+
+.center .container .applink .text span {
+  color: #B82D54;
+}
+
+.center .container .applink img {
+  position: absolute;
+  top: 25%;
+  left: 22px;
+  border: 1px solid #ccc;
+  padding: 2px;
+}

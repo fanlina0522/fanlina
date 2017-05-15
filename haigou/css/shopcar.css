@@ -1,0 +1,670 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #666;
+  font-size: 12px;
+}
+
+a:hover {
+  color: #E41436;
+}
+
+.container {
+  width: 1090px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+#topheader {
+  height: 31px;
+  background-color: #f2f2f2;
+  color: #666;
+}
+
+#topheader .container {
+  position: relative;
+}
+
+#topheader .container h5 {
+  position: absolute;
+  margin: 0;
+  left: 0;
+  top: 4px;
+}
+
+#topheader .container > .logMsg {
+  position: absolute;
+  left: 80px;
+  top: 4px;
+}
+
+#topheader .container > .logMsg > li {
+  float: left;
+  padding: 0 10px;
+  border-right: 1px solid #ccc;
+}
+
+#topheader .container > .logMsg > li:nth-last-child(1) {
+  border: 0;
+}
+
+#topheader .container > .logMsg > li:nth-last-child(1) > a > i {
+  color: #E41436;
+}
+
+#topheader .container > .orMsg {
+  position: absolute;
+  right: 0;
+  top: 4px;
+}
+
+#topheader .container > .orMsg > li {
+  float: left;
+  padding-left: 12px;
+  height: 30px;
+}
+
+#topheader .container > .orMsg > li > a {
+  border-right: 1px solid #ccc;
+  padding-right: 12px;
+}
+
+#topheader .container > .orMsg > li:nth-last-child(1) {
+  position: relative;
+}
+
+#topheader .container > .orMsg > li:nth-last-child(1) > a {
+  border: 0;
+}
+
+#topheader .container > .orMsg > li:nth-last-child(1):hover {
+  background-color: #fff;
+}
+
+#topheader .container > .orMsg > li:nth-last-child(1):hover > .more {
+  display: block;
+  z-index: 10;
+}
+
+#topheader .container > .orMsg > li:nth-last-child(1) > .more {
+  position: absolute;
+  width: 100px;
+  top: 28px;
+  left: -20px;
+  display: none;
+  width: 50px;
+  background-color: #fff;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(3) {
+  position: relative;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(3):hover {
+  background-color: #fff;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(3):hover > .self {
+  display: block;
+  z-index: 10;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(3) > .self {
+  position: absolute;
+  width: 100px;
+  top: 28px;
+  left: 0px;
+  display: none;
+  background-color: #fff;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(4) {
+  position: relative;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(4):hover {
+  background-color: #fff;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(4):hover > .server {
+  display: block;
+  z-index: 10;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(4) > .server {
+  position: absolute;
+  top: 28px;
+  left: 0px;
+  display: none;
+  background-color: #fff;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(5) {
+  position: relative;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(5):hover {
+  background-color: #fff;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(5):hover > .chongzhi {
+  display: block;
+  z-index: 10;
+}
+
+#topheader .container > .orMsg > li:nth-of-type(5) > .chongzhi {
+  position: absolute;
+  top: 28px;
+  left: 0px;
+  display: none;
+  background-color: #fff;
+}
+
+main {
+  padding-top: 20px;
+}
+
+main .container .msg {
+  min-height: 218px;
+  overflow: hidden;
+  position: relative;
+}
+
+main .container .msg .kongche {
+  position: absolute;
+  top: 100px;
+  left: 380px;
+}
+
+main .container .msg .kongche i {
+  position: absolute;
+  color: darkred;
+  font-size: 40px;
+}
+
+main .container .msg .kongche .csxx {
+  width: 280px;
+  height: 48px;
+  position: absolute;
+  top: -6px;
+  left: 45px;
+}
+
+main .container .msg .kongche .csxx a {
+  color: red;
+  font-size: 20px;
+}
+
+main .container .msg .feikong {
+  display: none;
+}
+
+main .container .msg .feikong .tou {
+  padding-top: 20px;
+  font-size: 14px;
+  height: 32px;
+  position: relative;
+}
+
+main .container .msg .feikong .tou > span:nth-of-type(2) {
+  padding-left: 10px;
+}
+
+main .container .msg .feikong .tou > span:nth-of-type(3) {
+  position: absolute;
+  right: 250px;
+}
+
+main .container .msg .feikong .tou .address {
+  position: absolute;
+  right: 0;
+  top: 11px;
+  display: inline-block;
+  height: 32px;
+}
+
+main .container .msg .feikong .tou .address .quyu {
+  position: relative;
+  top: 6px;
+  left: 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  width: 180px;
+  height: 20px;
+}
+
+main .container .msg .feikong .tou .address .quyu .tab {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: -171px;
+  padding: 10px 0;
+  min-width: 350px;
+  color: #000000;
+  border: #dddddd solid 1px;
+  background-color: #ffffff;
+  z-index: 8888;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+  font-size: 12px;
+}
+
+main .container .msg .feikong .tou .address .quyu .tab .title {
+  height: 30px;
+  width: 100%;
+  padding-left: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+main .container .msg .feikong .tou .address .quyu .tab .title span {
+  display: inline-block;
+  float: left;
+  width: auto;
+  min-width: 58px;
+  line-height: 32px;
+  height: 28px;
+  padding: 0 5px;
+  margin-right: -1px;
+  text-align: center;
+  border: 1px solid #dddddd;
+  cursor: pointer;
+  background: #ffffff;
+}
+
+main .container .msg .feikong .tou .address .quyu .tab .title .active {
+  border-top: 2px solid red;
+}
+
+main .container .msg .feikong .tou .address .quyu .tab .title b {
+  position: absolute;
+  right: 20px;
+  top: 4px;
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  font-size: 18px;
+  color: rgba(153, 153, 153, 0.7);
+  cursor: pointer;
+}
+
+main .container .msg .feikong .tou .address .quyu .tab .content div {
+  display: none;
+  padding-left: 10px;
+}
+
+main .container .msg .feikong .tou .address .quyu .tab .content div:nth-of-type(1) span {
+  width: 40px;
+}
+
+main .container .msg .feikong .tou .address .quyu .tab .content div span {
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  color: #000;
+}
+
+main .container .msg .feikong .msgNav {
+  height: 36px;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+}
+
+main .container .msg .feikong .msgNav div {
+  display: inline-block;
+  line-height: 34px;
+  font-size: 14px;
+  height: 34px;
+}
+
+main .container .msg .feikong .msgNav div:nth-of-type(1) {
+  width: 130px;
+  margin-left: 13px;
+}
+
+main .container .msg .feikong .msgNav div:nth-of-type(2) {
+  width: 350px;
+}
+
+main .container .msg .feikong .msgNav div:nth-of-type(3) {
+  width: 160px;
+}
+
+main .container .msg .feikong .msgNav div:nth-of-type(4) {
+  width: 179px;
+}
+
+main .container .msg .feikong .msgNav div:nth-of-type(5) {
+  width: 110px;
+}
+
+main .container .msg .feikong .msgNav div:nth-of-type(6) {
+  width: 104px;
+}
+
+main .container .msg .feikong .msgList {
+  min-height: 160px;
+}
+
+main .container .msg .feikong .msgList li {
+  height: 200px;
+  padding-bottom: 20px;
+}
+
+main .container .msg .feikong .msgList li .ziying {
+  height: 36px;
+  margin-top: 20px;
+  line-height: 34px;
+  margin-left: 13px;
+  font-size: 14px;
+  position: relative;
+}
+
+main .container .msg .feikong .msgList li .ziying img {
+  padding: 0 10px;
+  position: absolute;
+  top: 4px;
+  left: 30px;
+}
+
+main .container .msg .feikong .msgList li .ziying span {
+  padding-left: 70px;
+}
+
+main .container .msg .feikong .msgList li .up_div {
+  position: relative;
+  font-size: 14px;
+  height: 121px;
+  background-color: pink;
+  border: 1px solid #ccc;
+}
+
+main .container .msg .feikong .msgList li .up_div div {
+  display: inline-block;
+}
+
+main .container .msg .feikong .msgList li .up_div .xuanze {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 120px;
+  width: 46px;
+  text-align: center;
+  line-height: 120px;
+}
+
+main .container .msg .feikong .msgList li .up_div .shangpinxinxi {
+  position: absolute;
+  top: 0;
+  left: 46px;
+  width: 380px;
+  height: 120px;
+}
+
+main .container .msg .feikong .msgList li .up_div .shangpinxinxi img {
+  width: 80px;
+  padding-top: 20px;
+}
+
+main .container .msg .feikong .msgList li .up_div .shangpinxinxi h3 {
+  position: absolute;
+  padding-top: 30px;
+  top: 0;
+  left: 90px;
+  width: 250px;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  display: inline-block;
+}
+
+main .container .msg .feikong .msgList li .up_div ._price {
+  position: absolute;
+  top: 0;
+  left: 432px;
+  width: 160px;
+  height: 120px;
+  line-height: 120px;
+  text-align: center;
+}
+
+main .container .msg .feikong .msgList li .up_div ._price .x_price {
+  font-size: 16px;
+  color: red;
+}
+
+main .container .msg .feikong .msgList li .up_div .qty_change {
+  position: absolute;
+  top: 0;
+  left: 640px;
+  height: 120px;
+  width: 120px;
+  padding-top: 48px;
+}
+
+main .container .msg .feikong .msgList li .up_div .qty_change span {
+  display: inline-block;
+  text-align: center;
+  line-height: 20px;
+  float: left;
+  height: 20px;
+  width: 20px;
+  border: 1px solid #eee;
+}
+
+main .container .msg .feikong .msgList li .up_div .qty_change span:nth-of-type(2) {
+  width: 40px;
+}
+
+main .container .msg .feikong .msgList li .up_div .totalPrice {
+  position: absolute;
+  top: 0;
+  left: 790px;
+  width: 150px;
+  text-align: center;
+  height: 120px;
+  line-height: 120px;
+}
+
+main .container .msg .feikong .msgList li .up_div .btn_del {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  width: 80px;
+  height: 120px;
+  padding-top: 40px;
+}
+
+main .container .msg .feikong .msgList li .down_div {
+  height: 38px;
+  text-align: right;
+  border: 1px solid #eee;
+  border-top: 0;
+}
+
+main .container .msg .feikong .msgList li .down_div p {
+  margin: 0;
+  line-height: 38px;
+  font-size: 14px;
+}
+
+main .container .msg .feikong .pay {
+  margin-top: 20px;
+  background-color: #eee;
+  height: 58px;
+  border: 1px solid #ccc;
+  position: relative;
+}
+
+main .container .msg .feikong .pay > div {
+  display: inline-block;
+}
+
+main .container .msg .feikong .pay .leftl {
+  padding-left: 13px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 155px;
+  height: 58px;
+  line-height: 58px;
+}
+
+main .container .msg .feikong .pay .centerl {
+  position: absolute;
+  top: 0;
+  right: 156px;
+  height: 58px;
+}
+
+main .container .msg .feikong .pay .centerl p {
+  margin: 0;
+  line-height: 28px;
+  text-align: right;
+}
+
+main .container .msg .feikong .pay .centerl p:nth-of-type(1) span {
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+main .container .msg .feikong .pay .centerl p:nth-last-of-type(1) {
+  color: #ccc;
+  font-size: 14px;
+}
+
+main .container .msg .feikong .pay .gobuy button {
+  position: absolute;
+  border: 0;
+  right: -1px;
+  top: -1px;
+  bottom: 0;
+  width: 120px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  background-color: #e31436;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+main .guesslike, main .allbuy {
+  margin-top: 20px;
+  height: 364px;
+}
+
+main .guesslike h4, main .allbuy h4 {
+  line-height: 38px;
+  margin: 0;
+  padding: 10px 0;
+}
+
+main .guesslike h4 span, main .allbuy h4 span {
+  font-size: 14px;
+  color: #aaa;
+  padding-left: 30px;
+}
+
+main .guesslike .sp > div, main .allbuy .sp > div {
+  display: inline-block;
+  width: 212px;
+  height: 306px;
+  border: 1px solid #ccc;
+}
+
+main .guesslike .sp > div p, main .allbuy .sp > div p {
+  padding: 0 10px;
+  font-size: 12px;
+  margin: 0;
+  line-height: 18px;
+  margin: 0;
+  padding-left: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 190px;
+}
+
+main .guesslike .sp > div p:nth-of-type(1) a:hover, main .allbuy .sp > div p:nth-of-type(1) a:hover {
+  text-decoration: underline;
+}
+
+main .guesslike .sp > div span, main .allbuy .sp > div span {
+  padding-left: 10px;
+  color: red;
+  font-size: 16px;
+}
+
+main .guesslike .sp > div span del, main .allbuy .sp > div span del {
+  color: #ccc;
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+main .guesslike .sp > div > a, main .allbuy .sp > div > a {
+  padding-left: 10px;
+}
+
+main .guesslike .sp > div img, main .allbuy .sp > div img {
+  width: 190px;
+}
+
+footer {
+  margin-top: 50px;
+  height: 153px;
+  background-color: #000;
+  font-size: 12px;
+  text-align: center;
+}
+
+footer .container {
+  background-color: #000;
+}
+
+footer .container div {
+  padding-top: 20px;
+  text-align: center;
+  line-height: 20px;
+}
+
+footer .container div a {
+  color: #fff;
+}
+
+footer .container ul li {
+  display: inline-block;
+  padding-right: 10px;
+  color: #fff;
+}
+
+footer .container ul:nth-of-type(1) {
+  padding-top: 10px;
+}
+
+footer .container ul:nth-of-type(1) > li {
+  font-size: 12px;
+}
+
+footer .container > img {
+  padding-top: 10px;
+  width: 30px;
+}
+
+footer .container > img:nth-of-type(1) {
+  width: 80px;
+  padding-right: 30px;
+}

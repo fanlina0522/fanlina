@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录-网易考拉海购</title>
+	<link rel="stylesheet" type="text/css" href="../css/login.css">
+	<link rel="stylesheet" type="text/css" href="../font/iconfont.css">  	
+	<script src="../lib/jquery-3.1.1.js"></script>
+	<script src="../lib/jquery/jquery-2.1.1.min.js"></script>
+	<script src="../lib/jquery-confirm/jquery-confirm.js"></script>
+	<script>
+		$(function(){
+			$('#username').on('focus',function(){
+				$('.user').css({borderColor:'blue'})	
+			})
+			
+			$('#username').on('blur',function(){
+				$('.user').css({borderColor:'#ccc'});
+			})
+			$('#password').on('focus',function(){
+				$('.pwd').css({borderColor:'blue'});
+			})
+			$('#password').on('blur',function(){
+				$('.pwd').css({borderColor:'#ccc'});	
+			})
+			
+			$('#login').on('click',function(){
+				$.post('../api/login.php',{
+					username:$('#username').val(),
+					password:$('#password').val()
+				},function(response){
+					var $obj = eval('(' + response + ')');
+					if($obj.state){
+						window.location.href = '../index.html';
+					}else{
+						$.alert($obj.message);
+					}
+				})
+			})
+		})
+	</script>
+</head>
+<body>
+	<div id="box">
+		<header class="top container">
+			<a target="_black" href="../index.html"><img src="../images/login/logo.bmp" class="leftImg"></a>  
+			<img src="../images/login/xiao.bmp" class="rightImg">
+		</header>
+		<main class="center">
+			<div class="container">
+				<a href="#"><img src="../images/login/zhongjian.png"></a>
+				<div class="logForm">
+					<div class="up">
+						<h1>登录网易邮箱帐号</h1>
+						<div class="user">
+							<i class="iconfont icon-denglu"></i>
+							<input type="username" placeholder="网易邮箱帐号" id="username">
+						</div>
+						<div class="pwd">
+							<i class="iconfont icon-mima"></i>
+							<input type="password" placeholder="密码" id="password">
+						</div>
+						<div class="mdl">
+							<input type="checkbox">十天内免登陆
+							<a target="_black" href="#">忘记密码？</a>
+						</div>
+						
+						<button id="login">登 录</button>
+						<div class="emlink">
+							没有网易邮箱？
+							<a target="_black" href="register.html">立即免费注册>></a>
+						</div>
+					</div>
+					<div class="ortherLog">
+						使用第三方帐号登录:
+						<ul>
+							<li><a target="_black" href="#"><i class="iconfont icon-weixin1"></i></a></li>
+							<li><a target="_black" href="#"><i class="iconfont icon-zhifubao"></i></a></li>
+							<li><a target="_black" href="#"><i class="iconfont icon-weibo"></i></a></li>
+							<li><a target="_black" href="#"><i class="iconfont icon-QQ"></i></a></li>
+						</ul>
+					</div>
+				</div>
+				<a href="#" class="applink">
+					<img src="../images/login/erweima.jpg">
+					<div class="text">
+						<span>领取1000元新人礼包</span><br>APP下单更有优惠价
+					</div>
+				</a>
+			</div>
+		</main>
+		<footer class="foot container"></footer>
+	</div>	
+</body>
+</html>
